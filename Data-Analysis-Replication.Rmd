@@ -72,9 +72,10 @@ knitr::include_graphics("images/Test_Mean_SE.PNG")
 
 ```
 
+All means and SEs match.
+
 ### Replicate Fig 2: bar graphs
 ```{R}
-my_comparisons <- list( c("Control Light", "Control Dark"), c("CoCl2 Light", "CoCl2 Dark"), c("Control Dark", "CoCl2 Dark") )
 
 #Bar graph for interindividual distance
 IID<-ggplot(MSE, aes(x=Group, y=mean_IID, fill=Light)) +
@@ -111,6 +112,8 @@ Compare Figure 2
 knitr::include_graphics("images/Fig2.PNG")
 ```
 
+Most aspects of the figure match what is reported in the paper. The replicate is only missing the significance stars.
+
 ### Inferential statistics
 Run 2-way ANOVA
 ```{R}
@@ -144,6 +147,8 @@ knitr::include_graphics("images/Baseline_ANOVA.PNG")
 knitr::include_graphics("images/Test_ANOVA.PNG")
 ```
 
+All p-values and significant comparisons are the same. 
+
 Run Post-hoc Tukey test
 ```{R}
 
@@ -175,5 +180,7 @@ knitr::include_graphics("images/Baseline_Tukey.PNG")
 knitr::include_graphics("images/Test_Tukey.PNG")
 ```
 
+All (relevant) p-values and significant comparisons are the same. Note that the replicated Tukey test has a couple extra comparisons (Control:Light - CoCl2:Dark and CoCl2:Light-Control:Dark). Based on the aim of the study, these comparisons are not relevant and were likely not reported in the paper for this reason. 
+
 ### Summary
-Overall the data replication went very well. We were able to replicate the means and SEs that were reported in the paper. The meat of figure was simple to recreate. The 2-way ANOVA and Tukey Test also returned the same values that were reported in the paper's supplementary material. The only issue was recreating the aesthetics of the figure. This could be because they stated in the paper that they made their figures using Graphpad Prism instead of in R. For example, the treatments listed across the x-axis are in a different order as the figure in the paper. I tried rearranging the rows in the MSE dataframe to solve this but it did not help. I also attempted to add the significance stars using geom_signif() and stat_compare_means(), but this also proved to be tricky. The function would place the significance bar on both the baseline and test graphs when it needed to only be on one. 
+Overall the data replication went very well. I was able to replicate the means and SEs that were reported in the paper. The basics of figure were simple to recreate. The 2-way ANOVA and Tukey Test also returned the same values that were reported in the paper's supplementary material. The only issue was recreating the aesthetics of the figure. This could be because they stated in the paper that they made their figures using Graphpad Prism instead of in R. For example, the treatments listed across the x-axis are in a different order as the figure in the paper. I tried rearranging the rows in the MSE dataframe to solve this but it did not help. I also attempted to add the significance stars using geom_signif() and stat_compare_means(), but this also proved to be tricky. The functions would place the significance bar on both the baseline and test graphs when it needed to only be on one. However, the main aspects of the figure (figure type, SE bars, and data trends) match what is reported in the paper. 
